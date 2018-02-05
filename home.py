@@ -47,6 +47,8 @@ def main_screen():
     settimg=ImageTk.PhotoImage(Image.open("icons/set.png"))
     powerimg=ImageTk.PhotoImage(Image.open("icons/powerw.png"))
 
+    show = True
+
     #define a function that shuts down the program
     def exitProgram(event):
         print("Exiting")
@@ -54,6 +56,8 @@ def main_screen():
         cv2.destroyAllWindows()
 
     def change_basic(event):
+        global show
+        show = False
         print("change")
         vidFrame.master.destroy()
         cv2.destroyAllWindows()
@@ -70,17 +74,19 @@ def main_screen():
     settings.grid(row=1, column=1,padx=(10,45),pady=(150,0))
 
 
+
     def show_frame():
-        _, frame = cap.read()
-        frame = cv2.flip(frame, 1)
-        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-        cv2image=cv2.resize(cv2image,(590,440))
-        #in the future, loop to another function to adjust image from here
-        img = Image.fromarray(cv2image)
-        imgtk = ImageTk.PhotoImage(image=img)
-        lmain.imgtk = imgtk
-        lmain.configure(image=imgtk)
-        lmain.after(10, show_frame)
+        if (show == True):
+            _, frame = cap.read()
+            frame = cv2.flip(frame, 1)
+            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            cv2image=cv2.resize(cv2image,(590,440))
+            #in the future, loop to another function to adjust image from here
+            img = Image.fromarray(cv2image)
+            imgtk = ImageTk.PhotoImage(image=img)
+            lmain.imgtk = imgtk
+            lmain.configure(image=imgtk)
+            lmain.after(10, show_frame)
 
     show_frame()
     root.mainloop()
