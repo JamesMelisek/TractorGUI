@@ -5,7 +5,8 @@ from tkinter import PhotoImage
 import tkinter as tk
 import tkinter
 from PIL import Image, ImageTk
-#from Basic_Settings import basic_settings
+from Basic_Settings import basic_settings
+import time
 
 
 def main_screen():
@@ -54,13 +55,16 @@ def main_screen():
 
     def change_basic(event):
         print("change")
-      #  basic_settings(root)
+        vidFrame.master.destroy()
+        cv2.destroyAllWindows()
+        basic_settings(root)
 
     #buttons
-    settings =Button(vidFrame, width=64, height=64, image=settimg,bg= "gray" )
-    power =Button(vidFrame, width=64, height=64, image=powerimg,bg="gray" )
+    settings =Button(vidFrame, width=64, height=64, image=settimg,bg= "gray")
+    power =Button(vidFrame, width=64, height=64, image=powerimg,bg="gray")
     power.bind("<Button 1>", exitProgram) #connect button to shutdown
-
+    settings.bind("<Button 1>", change_basic)
+    power.bind("<Button 1>", )
 
     power.grid(row=1, column=1, padx=(10,45),pady=(30,50))
     settings.grid(row=1, column=1,padx=(10,45),pady=(150,0))
