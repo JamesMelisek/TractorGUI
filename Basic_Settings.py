@@ -5,8 +5,7 @@ import threading
 import datetime
 import imutils
 import cv2
-from home import main_screen
-from advanced_settings import advanced_settings
+
 from imutils.video import VideoStream
 import argparse
 import time
@@ -15,6 +14,7 @@ import time
 
 
 def basic_settings():
+
     basicRoot=Tk()
     leftFrame = Frame(basicRoot, height = 500, width=400)
     leftFrame.pack(side=LEFT)
@@ -69,18 +69,22 @@ def basic_settings():
     show = True
 
     def change_advanced(event):
+        from advanced_settings import advanced_settings
         global show
         show = False
         print("change")
-        imageFrame.master.destroy()
+        leftFrame.master.destroy()
         cv2.destroyAllWindows()
         advanced_settings()
 
     def go_home(event):
+        global show
         show = False
         print("change")
-        imageFrame.master.destroy()
+        cap.release()
+        leftFrame.master.destroy()
         cv2.destroyAllWindows()
+        from home import main_screen
         main_screen()
 
     advancedSettings= Button(rightFrame, text="ADVANCED SETTINGS")
@@ -122,3 +126,4 @@ def basic_settings():
     show_frame()
     basicRoot.mainloop()
 
+basic_settings()

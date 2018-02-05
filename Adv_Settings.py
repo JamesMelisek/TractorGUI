@@ -87,21 +87,22 @@ def sliders_settings():
 
 
     def show_frame():
-        _, frame = cap.read()
-        frame = cv2.flip(frame, 1)
-        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-        cv2image=cv2.resize(cv2image,(400,350))
-        #in the future, loop to another function to adjust image from here
-        img = Image.fromarray(cv2image)
-        imgtk = ImageTk.PhotoImage(image=img)
-        lmain.imgtk = imgtk
-        lmain.configure(image=imgtk)
-        lmain.after(10, show_frame)
+        if (show == True):
+            _, frame = cap.read()
+            frame = cv2.flip(frame, 1)
+            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            cv2image=cv2.resize(cv2image,(400,350))
+            #in the future, loop to another function to adjust image from here
+            img = Image.fromarray(cv2image)
+            imgtk = ImageTk.PhotoImage(image=img)
+            lmain.imgtk = imgtk
+            lmain.configure(image=imgtk)
+            lmain.after(10, show_frame)
 
     show_frame()
     root.mainloop()
 
-sliders_settings()
+
 
 
 
