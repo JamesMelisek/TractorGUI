@@ -49,7 +49,7 @@ def sliders_settings():
     #images
     saveimg=ImageTk.PhotoImage(Image.open("save2.png"))
     homeimg=ImageTk.PhotoImage(Image.open("home.png"))
-    backimg=ImageTk.PhotoImage(Image.open("back.png"))
+    backimg=ImageTk.PhotoImage(Image.open("back_n.png"))
 
     #buttons
 
