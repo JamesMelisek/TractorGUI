@@ -63,12 +63,12 @@ def advanced_settings():
     buttonsFrame = Frame(rightFrame)
 
 
-    img = "house_2.png"
+    img = "icons/house_2.png"
     img2 = Image.open(img)
     img3 = ImageTk.PhotoImage(image=img2)
     home = Button(buttonsFrame, image=img3)
 
-    imgbk = "back.png"
+    imgbk = "icons/back.png"
     imgbk2 = Image.open(imgbk)
     imgbk3 = ImageTk.PhotoImage(image=imgbk2)
     back = Button(buttonsFrame, image=imgbk3)

@@ -31,24 +31,24 @@ def basic_settings():
     leftbtns.pack(side=LEFT, pady=20)
     rightbtns.pack(pady=20)
 
-    imgsun = "sun.png"
+    imgsun = "icons/sun.png"
     imgsun2 = Image.open(imgsun)
     imgsun3 = ImageTk.PhotoImage(image=imgsun2)
     sunBtn=Button(leftbtns, image=imgsun3)
 
-    imgcld = "cloud.png"
+    imgcld = "icons/cloud.png"
     imgcld2 = Image.open(imgcld)
     imgcld3 = ImageTk.PhotoImage(image=imgcld2)
     cloudBtn = Button(rightbtns, image=imgcld3)
     sunBtn.pack(side=TOP, pady=10, padx=10)
     cloudBtn.pack(side=TOP, pady=10, padx=10)
 
-    imgevening = "evening.png"
+    imgevening = "icons/evening.png"
     imgevening2 = Image.open(imgevening)
     imgevening3 = ImageTk.PhotoImage(image=imgevening2)
     eveningBtn = Button(leftbtns, image=imgevening3, pady=10, padx=10)
 
-    imgraining = "rain.png"
+    imgraining = "icons/rain.png"
     imgraining2 = Image.open(imgraining)
     imgraining3 = ImageTk.PhotoImage(image=imgraining2)
     rainyBtn = Button(rightbtns, image=imgraining3, pady=10, padx=10)
@@ -71,12 +71,12 @@ def basic_settings():
     advancedSettings= Button(rightFrame, text="ADVANCED SETTINGS")
     buttonsFrame = Frame(rightFrame)
 
-    img = "house_2.png"
+    img = "icons/house_2.png"
     img2 = Image.open(img)
     img3 = ImageTk.PhotoImage(image=img2)
     home = Button(buttonsFrame, image=img3)
 
-    imgbk = "back.png"
+    imgbk = "icons/back.png"
     imgbk2 = Image.open(imgbk)
     imgbk3 = ImageTk.PhotoImage(image=imgbk2)
     back = Button(buttonsFrame, image=imgbk3)
