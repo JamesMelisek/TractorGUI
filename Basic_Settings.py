@@ -5,7 +5,8 @@ import threading
 import datetime
 import imutils
 import cv2
-
+from home import main_screen
+from advanced_settings import advanced_settings
 from imutils.video import VideoStream
 import argparse
 import time
@@ -65,20 +66,39 @@ def basic_settings():
     lmain.pack()
     cap = cv2.VideoCapture(0)
 
+    show = True
 
+    def change_advanced(event):
+        global show
+        show = False
+        print("change")
+        imageFrame.master.destroy()
+        cv2.destroyAllWindows()
+        advanced_settings()
+
+    def go_home(event):
+        show = False
+        print("change")
+        imageFrame.master.destroy()
+        cv2.destroyAllWindows()
+        main_screen()
 
     advancedSettings= Button(rightFrame, text="ADVANCED SETTINGS")
+    advancedSettings.bind("<Button 1>", change_advanced)
+
     buttonsFrame = Frame(rightFrame)
 
     img = "icons/house_2.png"
     img2 = Image.open(img)
     img3 = ImageTk.PhotoImage(image=img2)
     home = Button(buttonsFrame, image=img3)
+    home.bind("<Button 1>", go_home)
 
     imgbk = "icons/back.png"
     imgbk2 = Image.open(imgbk)
     imgbk3 = ImageTk.PhotoImage(image=imgbk2)
     back = Button(buttonsFrame, image=imgbk3)
+    back.bind("<Button 1>", go_home)
 
     advancedSettings.pack(pady=10)
     buttonsFrame.pack()
@@ -87,16 +107,17 @@ def basic_settings():
     back.pack(pady=10, padx=10)
 
     def show_frame():
-        _, frame = cap.read()
-        frame = cv2.flip(frame, 1)
-        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-        cv2image = cv2.resize(cv2image, (500, 400))
-        # in the future, loop to another function to adjust image from here
-        img = Image.fromarray(cv2image)
-        imgtk = ImageTk.PhotoImage(image=img)
-        lmain.imgtk = imgtk
-        lmain.configure(image=imgtk)
-        lmain.after(10, show_frame)
+        if (show == True):
+            _, frame = cap.read()
+            frame = cv2.flip(frame, 1)
+            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            cv2image = cv2.resize(cv2image, (500, 400))
+            # in the future, loop to another function to adjust image from here
+            img = Image.fromarray(cv2image)
+            imgtk = ImageTk.PhotoImage(image=img)
+            lmain.imgtk = imgtk
+            lmain.configure(image=imgtk)
+            lmain.after(10, show_frame)
 
     show_frame()
     basicRoot.mainloop()
