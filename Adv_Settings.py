@@ -47,9 +47,9 @@ def sliders_settings():
     name_entry.grid(row=2, column=0,sticky=W+E,padx=(10,200),pady=(0,0),columnspan=2)
 
     #images
-    saveimg=ImageTk.PhotoImage(Image.open("save2.png"))
-    homeimg=ImageTk.PhotoImage(Image.open("home.png"))
-    backimg=ImageTk.PhotoImage(Image.open("back_n.png"))
+    saveimg=ImageTk.PhotoImage(Image.open("icons/save2.png"))
+    homeimg=ImageTk.PhotoImage(Image.open("icons/home.png"))
+    backimg=ImageTk.PhotoImage(Image.open("icons/back_n.png"))
 
     #buttons
 

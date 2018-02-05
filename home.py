@@ -42,8 +42,8 @@ lmain.grid(row=1, column=0, pady=0, padx=(10,0), rowspan=2, sticky=S)
 
 
 #images
-settimg=ImageTk.PhotoImage(Image.open("set.png"))
-powerimg=ImageTk.PhotoImage(Image.open("powerw.png"))
+settimg=ImageTk.PhotoImage(Image.open("icons/set.png"))
+powerimg=ImageTk.PhotoImage(Image.open("icons/powerw.png"))
 
 
 #buttons
