@@ -5,10 +5,10 @@ import cv2
 
 import threading
 import datetime
-import imutils
+#import imutils
 import os
 
-from imutils.video import VideoStream
+#from imutils.video import VideoStream
 import argparse
 import time
 

@@ -3,7 +3,7 @@ from tkinter import ttk
 import cv2
 from tkinter import PhotoImage
 import tkinter as tk
-import Tkinter
+import tkinter
 from PIL import Image, ImageTk
 
 
