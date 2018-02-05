@@ -61,7 +61,7 @@ def main_screen():
         print("change")
         vidFrame.master.destroy()
         cv2.destroyAllWindows()
-        basic_settings(root)
+        basic_settings()
 
     #buttons
     settings =Button(vidFrame, width=64, height=64, image=settimg,bg= "gray")

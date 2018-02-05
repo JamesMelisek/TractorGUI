@@ -5,7 +5,6 @@ import threading
 import datetime
 import imutils
 import cv2
-import os
 
 from imutils.video import VideoStream
 import argparse
@@ -102,4 +101,3 @@ def basic_settings():
     show_frame()
     basicRoot.mainloop()
 
-basic_settings()
