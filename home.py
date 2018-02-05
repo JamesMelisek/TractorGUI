@@ -51,8 +51,7 @@ def main_screen():
     #define a function that shuts down the program
     def exitProgram(event):
         print("Exiting")
-        vidFrame.master.destroy()
-        cv2.destroyAllWindows()
+        exit(1)
 
     def change_basic(event):
         from Basic_Settings import basic_settings

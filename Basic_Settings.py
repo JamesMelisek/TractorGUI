@@ -126,4 +126,3 @@ def basic_settings():
     show_frame()
     basicRoot.mainloop()
 
-basic_settings()

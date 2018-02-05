@@ -35,7 +35,7 @@ def sliders_settings():
     title.grid(row=0, column=0,pady=(0,0), padx=10, sticky=W)
     lmain=tk.Label(vidFrame, relief=SUNKEN)
     lmain.grid(row=3, column=0, pady=(0,0), padx=(10,0),sticky=S+E+W)
-
+    show = True
     #slider frame
     slideFrame = Frame(root)
     slideFrame.pack(side=RIGHT)
@@ -51,6 +51,25 @@ def sliders_settings():
     homeimg=ImageTk.PhotoImage(Image.open("icons/home.png"))
     backimg=ImageTk.PhotoImage(Image.open("icons/back_n.png"))
 
+    #button functions
+
+    def go_home(event):
+        global show
+        show = False
+        print("change")
+        vidFrame.master.destroy()
+        cv2.destroyAllWindows()
+        from home import main_screen
+        main_screen()
+    def change_advanced(event):
+        from advanced_settings import advanced_settings
+        global show
+        show = False
+        print("change")
+        vidFrame.master.destroy()
+        cv2.destroyAllWindows()
+        advanced_settings()
+
     #buttons
 
     save=Button(vidFrame, width=32, height=32, image=saveimg, bg="gray")
@@ -58,9 +77,11 @@ def sliders_settings():
 
     home=Button(slideFrame,width=45, height=45, image=homeimg, bg="gray")
     home.grid(row=6,column=0,padx=(0,150),pady=(40,0),sticky=E)
+    home.bind("<Button 1>", go_home)
 
     back=Button(slideFrame,width=45, height=45, image=backimg, bg="gray")
     back.grid(row=6,column=0,padx=(150,70),pady=(40,0), sticky=E)
+    back.bind("<Button 1>", change_advanced)
 
     #sliders
     slide1= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Saturation", length=200)
@@ -101,7 +122,6 @@ def sliders_settings():
 
     show_frame()
     root.mainloop()
-
 
 
 

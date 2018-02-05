@@ -21,7 +21,7 @@ def advanced_settings():
     rightFrame.pack(side=RIGHT, padx=50)
 
     show = True
-
+#button functions
     #define a function that takes you to make new
     def make_new_file(event):
         from Adv_Settings import sliders_settings
@@ -32,6 +32,25 @@ def advanced_settings():
         cv2.destroyAllWindows()
         sliders_settings()
 
+    def change_basic(event):
+        from Basic_Settings import basic_settings
+        global show
+        show = False
+        print("change")
+        leftFrame.master.destroy()
+        cv2.destroyAllWindows()
+        basic_settings()
+
+    def go_home(event):
+        from home import main_screen
+        global show
+        show = False
+        print("change")
+        cap.release()
+        leftFrame.master.destroy()
+        cv2.destroyAllWindows()
+        from home import main_screen
+        main_screen()
 
     titleLabel=Label(leftFrame, text="ADVANCED SETTINGS")
     titleLabel.pack(side=TOP)
@@ -74,18 +93,19 @@ def advanced_settings():
 
     mkbtn= Button(rightFrame, text="MAKE NEW")
     buttonsFrame = Frame(rightFrame)
-    from Adv_Settings import sliders_settings
-    mkbtn.bind("<Button 1>", sliders_settings)
+    mkbtn.bind("<Button 1>", make_new_file)
 
     img = "icons/house_2.png"
     img2 = Image.open(img)
     img3 = ImageTk.PhotoImage(image=img2)
     home = Button(buttonsFrame, image=img3)
+    home.bind("<Button 1>", go_home)
 
     imgbk = "icons/back.png"
     imgbk2 = Image.open(imgbk)
     imgbk3 = ImageTk.PhotoImage(image=imgbk2)
     back = Button(buttonsFrame, image=imgbk3)
+    back.bind("<Button 1>", change_basic)
 
 
     mkbtn.pack(pady=10)
