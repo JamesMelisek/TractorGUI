@@ -87,23 +87,23 @@ def sliders_settings():
     back.bind("<Button 1>", change_advanced)
 
     #sliders
-    slide1= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Saturation", length=200)
+    slide1= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Hue Min", length=200)
     slide1.grid(row=0,column=0, sticky=N+E, padx=(0,30),pady=0)
 
-    slide2= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Hue", length=200)
+    slide2= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Hue Max", length=200)
     slide2.grid(row=1,column=0, sticky=N+E, padx=(0,30),pady=0)
 
-    slide3= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Brightness", length=200)
+    slide3= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Saturation Min", length=200)
     slide3.grid(row=2,column=0, sticky=N+E, padx=(0,30),pady=0)
 
-    slide4= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Convolution", length=200)
+    slide4= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Saturation Max", length=200)
     slide4.grid(row=3,column=0, sticky=N+E, padx=(0,30),pady=0)
 
 
-    slide5= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="etc1", length=200)
+    slide5= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Value Min", length=200)
     slide5.grid(row=4,column=0, sticky=N+E, padx=(0,30),pady=0)
 
-    slide6= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="etc2", length=200)
+    slide6= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Value Max", length=200)
     slide6.grid(row=5,column=0, sticky=N+E, padx=(0,30),pady=0)
 
 
@@ -114,32 +114,27 @@ def sliders_settings():
         if (show == True):
             _, frame = cap.read()
             frame = cv2.flip(frame, 1)
-            frame = cv2.resize(frame, (400, 350))
+            frame_orig = cv2.resize(frame, (400, 350))
             # *************detect line
             # threshold the image according to the values
 
-            frame_mod = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            hsv = cv2.cvtColor(frame_mod, cv2.COLOR_BGR2HSV)
-            # standard values that usually work:
-            # lower_hsv = np.array([6, 88, 100])
-            # higher_hsv= np.array([24, 207, 255])
-            lower_hsv = np.array([threshold.currentThresh.getHMin(), threshold.currentThresh.getSMin(),
-                                  threshold.currentThresh.getVMin()])
-            higher_hsv = np.array([threshold.currentThresh.getHMax(), threshold.currentThresh.getSMax(),
-                                   threshold.currentThresh.getVMax()])
+            # get trackbar positions
+            ilowH = slide1.get()
+            ihighH = slide2.get()
+            ilowS = slide3.get()
+            ihighS = slide4.get()
+            ilowV = slide5.get()
+            ihighV = slide6.get()
+
+            hsv = cv2.cvtColor(frame_orig, cv2.COLOR_BGR2HSV)
+            lower_hsv = np.array([ilowH, ilowS, ilowV])
+            higher_hsv = np.array([ihighH, ihighS, ihighV])
             mask = cv2.inRange(hsv, lower_hsv, higher_hsv)
 
-            # find the vertical histogram and draw a line
-            histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
-            val = np.amax(histogram)
-            i = histogram.tolist().index(val)
-
-            # draw a line at the column with the most white pixels
-            cv2.line(frame, (i, 150), (i, 300), (255, 0, 0), 3)
-            cv2.line(frame, (200, 150), (200, 300), (0, 0, 255), 2)
+            frame = cv2.bitwise_and(frame_orig, frame_orig, mask=mask)
 
             # *********continue with showing
-            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            cv2image = frame
 
             #in the future, loop to another function to adjust image from here
             img = Image.fromarray(cv2image)
@@ -154,4 +149,4 @@ def sliders_settings():
 
 
 
-
+sliders_settings()
