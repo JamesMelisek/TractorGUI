@@ -151,5 +151,3 @@ def sliders_settings():
 
 
 
-
-sliders_settings()
