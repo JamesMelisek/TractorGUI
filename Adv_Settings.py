@@ -114,6 +114,7 @@ def sliders_settings():
         if (show == True):
             _, frame = cap.read()
             frame = cv2.flip(frame, 1)
+            frame = cv2.resize(frame, (400, 350))
             # *************detect line
             # threshold the image according to the values
 
@@ -134,12 +135,12 @@ def sliders_settings():
             i = histogram.tolist().index(val)
 
             # draw a line at the column with the most white pixels
-            cv2.line(frame, (i, 250), (i, 600), (255, 0, 0), 3)
-            cv2.line(frame, (610, 250), (610, 600), (0, 0, 255), 2)
+            cv2.line(frame, (i, 150), (i, 300), (255, 0, 0), 3)
+            cv2.line(frame, (200, 150), (200, 300), (0, 0, 255), 2)
 
             # *********continue with showing
             cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-            cv2image=cv2.resize(cv2image,(400,350))
+
             #in the future, loop to another function to adjust image from here
             img = Image.fromarray(cv2image)
             imgtk = ImageTk.PhotoImage(image=img)
@@ -149,8 +150,6 @@ def sliders_settings():
 
     show_frame()
     root.mainloop()
-
-
 
 
 
