@@ -6,6 +6,10 @@ import tkinter as tk
 import tkinter
 from PIL import Image, ImageTk
 import time
+import numpy as np
+import math
+import threshold
+
 
 
 def main_screen():
@@ -78,6 +82,30 @@ def main_screen():
         if (show == True):
             _, frame = cap.read()
             frame = cv2.flip(frame, 1)
+
+            #*************detect line
+            # threshold the image according to the values
+
+            frame_mod = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            hsv = cv2.cvtColor(frame_mod, cv2.COLOR_BGR2HSV)
+            # standard values that usually work:
+            # lower_hsv = np.array([6, 88, 100])
+            # higher_hsv= np.array([24, 207, 255])
+            lower_hsv = np.array([threshold.currentThresh.getHMin(), threshold.currentThresh.getSMin(),threshold.currentThresh.getVMin()])
+            higher_hsv = np.array([threshold.currentThresh.getHMax(), threshold.currentThresh.getSMax(), threshold.currentThresh.getVMax()])
+            mask = cv2.inRange(hsv, lower_hsv, higher_hsv)
+
+            # find the vertical histogram and draw a line
+            histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
+            val = np.amax(histogram)
+            i = histogram.tolist().index(val)
+
+            # draw a line at the column with the most white pixels
+            cv2.line(frame, (i, 250), (i, 440), (255, 0, 0), 3)
+            cv2.line(frame, (295, 250), (295, 440), (0, 0, 255), 2)
+
+            #*********continue with showing
+
             cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
             cv2image=cv2.resize(cv2image,(590,440))
             #in the future, loop to another function to adjust image from here
@@ -89,7 +117,4 @@ def main_screen():
 
     show_frame()
     root.mainloop()
-
-
-
 
