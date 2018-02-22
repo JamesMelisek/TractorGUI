@@ -91,12 +91,14 @@ def sliders_settings():
     slide1.grid(row=0,column=0, sticky=N+E, padx=(0,30),pady=0)
 
     slide2= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Hue Max", length=200)
+    slide2.set(255)
     slide2.grid(row=1,column=0, sticky=N+E, padx=(0,30),pady=0)
 
     slide3= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Saturation Min", length=200)
     slide3.grid(row=2,column=0, sticky=N+E, padx=(0,30),pady=0)
 
     slide4= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Saturation Max", length=200)
+    slide4.set(255)
     slide4.grid(row=3,column=0, sticky=N+E, padx=(0,30),pady=0)
 
 
@@ -104,6 +106,7 @@ def sliders_settings():
     slide5.grid(row=4,column=0, sticky=N+E, padx=(0,30),pady=0)
 
     slide6= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Value Max", length=200)
+    slide6.set(255)
     slide6.grid(row=5,column=0, sticky=N+E, padx=(0,30),pady=0)
 
 
