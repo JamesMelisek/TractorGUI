@@ -5,7 +5,7 @@ import threading
 import datetime
 import imutils
 import cv2
-
+import math
 from imutils.video import VideoStream
 import argparse
 import time
@@ -129,7 +129,8 @@ def basic_settings():
             mask = cv2.inRange(hsv, lower_hsv, higher_hsv)
 
             # find the vertical histogram and draw a line
-            histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
+            #histogram = np.sum(mask[math.floor(mask.shape[0]):, :], axis=0)
+            histogram = np.sum(mask[(mask.shape[0] / 2):, :], axis=0)
             val = np.amax(histogram)
             i = histogram.tolist().index(val)
 

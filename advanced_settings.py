@@ -14,6 +14,7 @@ import time
 import numpy as np
 import math
 import threshold
+settings=[]
 
 def advanced_settings():
     basicRoot=Tk()
@@ -62,7 +63,8 @@ def advanced_settings():
     #create the scroll bar for selection
     scrollbar = Scrollbar(scrollFrame)
     scrollbar.pack(side=RIGHT, fill=Y)
-    settings=["Day","Evening","Short","Tall","other","other1","other3","other4","other5","other5","other6","other7", "other8"]
+
+    #settings=["Day","Evening","Short","Tall","other","other1","other3","other4","other5","other5","other6","other7", "other8"]
     mylist = Listbox(scrollFrame, yscrollcommand=scrollbar.set)
     for line in settings:
         mylist.insert(END, line)
@@ -95,7 +97,8 @@ def advanced_settings():
             mask = cv2.inRange(hsv, lower_hsv, higher_hsv)
 
             # find the vertical histogram and draw a line
-            histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
+            #histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
+            histogram = np.sum(mask[(mask.shape[0] / 2):, :], axis=0)
             val = np.amax(histogram)
             i = histogram.tolist().index(val)
 

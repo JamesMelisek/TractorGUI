@@ -17,8 +17,8 @@ import threshold
 
 
 
-cap = cv2.VideoCapture(0)
 
+cap = cv2.VideoCapture(0)
 
 def sliders_settings():
 
@@ -27,9 +27,6 @@ def sliders_settings():
     #title
     root.title("Advanced Settings")
     root.geometry('700x500')
-
-
-
 
     #video frame
     vidFrame = Frame(root)
@@ -43,11 +40,15 @@ def sliders_settings():
     slideFrame = Frame(root)
     slideFrame.pack(side=RIGHT)
 
+
+
     #entry
+    file_name=StringVar()
     name_label=Label(vidFrame, text="Name")
-    name_entry= Entry(vidFrame)
+    name_entry= Entry(vidFrame,textvariable=file_name)
     name_label.grid(row=1,column=0,sticky=W,padx=(10,0),pady=(20,0))
     name_entry.grid(row=2, column=0,sticky=W+E,padx=(10,200),pady=(0,0),columnspan=2)
+
 
     #images
     saveimg=ImageTk.PhotoImage(Image.open("icons/save2.png"))
@@ -55,6 +56,14 @@ def sliders_settings():
     backimg=ImageTk.PhotoImage(Image.open("icons/back_n.png"))
 
     #button functions
+
+
+        # save button function
+    def save_as(self):
+        from advanced_settings import settings
+        name = file_name.get()
+        settings.append(name)
+        return
 
     def go_home(event):
         global show
@@ -77,6 +86,7 @@ def sliders_settings():
 
     save=Button(vidFrame, width=32, height=32, image=saveimg, bg="gray")
     save.grid(row=2,column=0,padx=(225,0),pady=(0,20), sticky=W)
+    save.bind("<Button 1>", save_as)
 
     home=Button(slideFrame,width=45, height=45, image=homeimg, bg="gray")
     home.grid(row=6,column=0,padx=(0,150),pady=(40,0),sticky=E)
