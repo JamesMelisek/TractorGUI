@@ -15,7 +15,17 @@ import threshold
 
 #left and right frames
 
+#Variables to keep track of slider position
 
+class SliderSet:
+    def __init__(self,name=None, slider1_pos=0, slider2_pos=0,slider3_pos=0,slider4_pos=0,slider5_pos=0,slider6_pos=0):
+        self.name=name
+        self.s1=slider1_pos
+        self.s2=slider2_pos
+        self.s3=slider3_pos
+        self.s4=slider4_pos
+        self.s5=slider5_pos
+        self.s6=slider6_pos
 
 
 cap = cv2.VideoCapture(0)
@@ -44,6 +54,7 @@ def sliders_settings():
 
     #entry
     file_name=StringVar()
+    name=StringVar()
     name_label=Label(vidFrame, text="Name")
     name_entry= Entry(vidFrame,textvariable=file_name)
     name_label.grid(row=1,column=0,sticky=W,padx=(10,0),pady=(20,0))
@@ -62,7 +73,8 @@ def sliders_settings():
     def save_as(self):
         from advanced_settings import settings
         name = file_name.get()
-        settings.append(name)
+        item= SliderSet(name,slide1.get(),slide2.get(),slide3.get(),slide4.get(),slide5.get(),slide6.get())
+        settings.append(item)
         return
 
     def go_home(event):
@@ -111,7 +123,6 @@ def sliders_settings():
     slide4.set(255)
     slide4.grid(row=3,column=0, sticky=N+E, padx=(0,30),pady=0)
 
-
     slide5= Scale(slideFrame, from_=0, to=255, orient=HORIZONTAL, label="Value Min", length=200)
     slide5.grid(row=4,column=0, sticky=N+E, padx=(0,30),pady=0)
 
@@ -132,6 +143,7 @@ def sliders_settings():
             # threshold the image according to the values
 
             # get trackbar positions
+
             ilowH = slide1.get()
             ihighH = slide2.get()
             ilowS = slide3.get()

@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import Image
 from PIL import ImageTk
 import cv2
+from Adv_Settings import sliders_settings
 
 import threading
 import datetime
@@ -14,7 +15,12 @@ import time
 import numpy as np
 import math
 import threshold
-settings=[]
+settings =  []
+
+
+# saved slider function, stores settings
+
+
 
 def advanced_settings():
     basicRoot=Tk()
@@ -22,6 +28,12 @@ def advanced_settings():
     leftFrame.pack(side=LEFT)
     rightFrame = Frame(basicRoot, height=500, width=200)
     rightFrame.pack(side=RIGHT, padx=50)
+
+
+
+
+
+
 
     show = True
 #button functions
@@ -64,13 +76,22 @@ def advanced_settings():
     scrollbar = Scrollbar(scrollFrame)
     scrollbar.pack(side=RIGHT, fill=Y)
 
+    def update_sliders(self):
+       index=mylist.curselection()
+       setting= settings[index[0]]
+       #update sliders
+
+
+
     #settings=["Day","Evening","Short","Tall","other","other1","other3","other4","other5","other5","other6","other7", "other8"]
-    mylist = Listbox(scrollFrame, yscrollcommand=scrollbar.set)
+    mylist = Listbox(scrollFrame, yscrollcommand=scrollbar.set, selectmode=EXTENDED)
+    mylist.bind("<Double-Button-1>",update_sliders)
     for line in settings:
-        mylist.insert(END, line)
+        mylist.insert(END, line.name)
 
     mylist.pack(side=LEFT, fill=BOTH)
     scrollbar.config(command=mylist.yview)
+
 
 
     #the top will show the video
