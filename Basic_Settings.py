@@ -136,6 +136,7 @@ def basic_settings():
             _, frame = cap.read()
             frame = cv2.flip(frame, 1)
             frame = cv2.resize(frame, (590, 440))
+            frame_orig=frame
             # *************detect line
             # threshold the image according to the values
             frame_mod = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -153,12 +154,10 @@ def basic_settings():
             val = np.amax(histogram)
             i = histogram.tolist().index(val)
 
-            # draw a line at the column with the most white pixels
-            cv2.line(frame, (i, 150), (i, 400), (255, 0, 0), 3)
-            cv2.line(frame, (295, 150), (295, 400), (0, 0, 255), 2)
-
-            # *********continue with showing
-            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            cv2image = cv2.cvtColor(frame_orig, cv2.COLOR_BGR2RGBA)
+            cv2.line(cv2image, (i, 150), (i, 400), (255, 0, 0), 3)
+            cv2.line(cv2image, (295, 150), (295, 400), (0, 0, 255), 2)
+            cv2image = cv2.cvtColor(cv2image, cv2.COLOR_RGBA2RGB)
 
             # in the future, loop to another function to adjust image from here
             img = Image.fromarray(cv2image)

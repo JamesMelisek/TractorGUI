@@ -101,16 +101,17 @@ def advanced_settings():
     imageFrame.pack(side=BOTTOM, padx=10, pady=10)
 
     def show_frame():
-
+        threshold.currentThresh.printAll()
         if (show == True ):
             _, frame = cap.read()
             frame = cv2.flip(frame, 1)
             frame = cv2.resize(frame, (590, 440))
+            frame_orig=frame
             # *************detect line
             # threshold the image according to the values
 
-            frame_mod = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            hsv = cv2.cvtColor(frame_mod, cv2.COLOR_BGR2HSV)
+          #  frame_mod = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
             # standard values that usually work:
             # lower_hsv = np.array([6, 88, 100])
             # higher_hsv= np.array([24, 207, 255])
@@ -122,25 +123,40 @@ def advanced_settings():
             mask = cv2.inRange(hsv, lower_hsv, higher_hsv)
 
             # find the vertical histogram and draw a line
-            #histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
+         #   histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
             histogram = np.sum(mask[(mask.shape[0] / 2):, :], axis=0)
             val = np.amax(histogram)
             i = histogram.tolist().index(val)
 
             # draw a line at the column with the most white pixels
             # draw a line at the column with the most white pixels
-            cv2.line(frame, (i, 150), (i, 400), (255, 0, 0), 3)
-            cv2.line(frame, (295, 150), (295, 400), (0, 0, 255), 2)
+        #    cv2.line(frame_orig, (i, 150), (i, 400), (255, 0, 0), 3)
+        #    cv2.line(frame_orig, (295, 150), (295, 400), (0, 0, 255), 2)
+
+            #frame = cv2.bitwise_and(frame_orig, frame_orig, mask=mask)
 
             # *********continue with showing
-            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-
+            cv2image = cv2.cvtColor(frame_orig, cv2.COLOR_BGR2RGBA)
+            cv2.line(cv2image, (i, 150), (i, 400), (255, 0, 0), 3)
+            cv2.line(cv2image, (295, 150), (295, 400), (0, 0, 255), 2)
+            cv2image = cv2.cvtColor(cv2image, cv2.COLOR_RGBA2RGB)
             # in the future, loop to another function to adjust image from here
             img = Image.fromarray(cv2image)
             imgtk = ImageTk.PhotoImage(image=img)
             lmain.imgtk = imgtk
             lmain.configure(image=imgtk)
             lmain.after(10, show_frame)
+
+            # *********continue with showing
+            #frame = cv2.bitwise_and(frame, frame, mask=mask)
+         #   cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+            #cv2image = frame
+            # in the future, loop to another function to adjust image from here
+         #   img = Image.fromarray(cv2image)
+         #   imgtk = ImageTk.PhotoImage(image=img)
+         #   lmain.imgtk = imgtk
+         #   lmain.configure(image=imgtk)
+         #   lmain.after(10, show_frame)
 
     # Capture video frames
     lmain = Label(imageFrame)
