@@ -19,14 +19,14 @@ import threshold
 
 
 class SliderSet:
-    def __init__(self,name=None, hHigh=0,hLow=0,sHigh=0,sLow=0,vHigh=0,vLow=0):
+    def __init__(self,name,hHigh,hLow,sHigh,sLow,vHigh,vLow):
         self.name=name
-        self.s1=hHigh
-        self.s2=hLow
-        self.s3=sHigh
-        self.s4=sLow
-        self.s5=vHigh
-        self.s6=vLow
+        self.s1=hLow
+        self.s2=hHigh
+        self.s3=sLow
+        self.s4=sHigh
+        self.s5=vLow
+        self.s6=vHigh
 
     def print_sets(self):
         print(self.s1, self.s2, self.s3, self.s4 ,self.s5, self.s6)
@@ -78,7 +78,7 @@ def sliders_settings():
     def save_as(self):
         from advanced_settings import settings
         name = file_name.get()
-        item= SliderSet(name,slide1.get(),slide2.get(),slide3.get(),slide4.get(),slide5.get(),slide6.get())
+        item= SliderSet(name,slide2.get(),slide1.get(),slide4.get(),slide3.get(),slide6.get(),slide5.get())
         settings.append(item)
         return
 

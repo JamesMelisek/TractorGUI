@@ -46,13 +46,14 @@ class threshold:
     def setVMin(self, val):
         self.vmin = val
 
-    def setAll(self, s1, s2, s3, s4, s5, s6):
+    def setAll(self, s2, s1, s4, s3, s6, s5):
         self.setHMax(s2)
         self.setHMin(s1)
         self.setSMax(s4)
         self.setSMin(s3)
         self.setVMax(s6)
         self.setVMin(s5)
+
     def printAll(self):
         print(self.getHMax(), self.getHMin(),self.getSMax(),self.getSMin(),self.getVMax(),self.getVMin())
 

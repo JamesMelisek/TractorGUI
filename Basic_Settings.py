@@ -33,27 +33,46 @@ def basic_settings():
     leftbtns.pack(side=LEFT, pady=20)
     rightbtns.pack(pady=20)
 
+    #Basic settings button functions
+    def sun_set(self):
+        threshold.currentThresh.setAll(24, 6, 207, 88, 255, 100)
+
+    def cloudy_set(self):
+        threshold.currentThresh.setAll(50, 80, 30, 50, 255, 100)
+    def eve_set(self):
+        threshold.currentThresh.setAll(24, 6, 207, 88, 255, 100)
+    def rain_set(self):
+        threshold.currentThresh.setAll(24, 6, 207, 88, 255, 100)
+
+
+
     imgsun = "icons/sun.png"
     imgsun2 = Image.open(imgsun)
     imgsun3 = ImageTk.PhotoImage(image=imgsun2)
     sunBtn=Button(leftbtns, image=imgsun3)
+    sunBtn.bind("<Double-Button-1>", sun_set)
 
     imgcld = "icons/cloud.png"
     imgcld2 = Image.open(imgcld)
     imgcld3 = ImageTk.PhotoImage(image=imgcld2)
     cloudBtn = Button(rightbtns, image=imgcld3)
+    cloudBtn.bind("<Double-Button-1>", cloudy_set)
+
     sunBtn.pack(side=TOP, pady=10, padx=10)
     cloudBtn.pack(side=TOP, pady=10, padx=10)
+
 
     imgevening = "icons/evening.png"
     imgevening2 = Image.open(imgevening)
     imgevening3 = ImageTk.PhotoImage(image=imgevening2)
     eveningBtn = Button(leftbtns, image=imgevening3, pady=10, padx=10)
+    eveningBtn.bind("<Double-Button-1>", eve_set)
 
     imgraining = "icons/rain.png"
     imgraining2 = Image.open(imgraining)
     imgraining3 = ImageTk.PhotoImage(image=imgraining2)
     rainyBtn = Button(rightbtns, image=imgraining3, pady=10, padx=10)
+    rainyBtn.bind("<Double-Button-1>", rain_set)
     eveningBtn.pack()
     rainyBtn.pack()
 

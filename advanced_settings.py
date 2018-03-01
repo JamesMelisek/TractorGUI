@@ -78,7 +78,7 @@ def advanced_settings():
     def update_sliders(self):
        index=mylist.curselection()
        setting= settings[index[0]]
-       threshold.currentThresh.setAll(setting.s1, setting.s2, setting.s3, setting.s4, setting.s5, setting.s6)
+       threshold.currentThresh.setAll(setting.s2, setting.s1, setting.s4, setting.s3, setting.s6, setting.s5)
 
 
        #update sliders
