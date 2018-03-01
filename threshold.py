@@ -16,9 +16,8 @@ class threshold:
     def getHMin(self):
         return self.hmin
 
-    def getSMax(self):)
-
-    return self.smax
+    def getSMax(self):
+        return self.smax
 
     def getSMin(self):
         return self.smin
@@ -53,7 +52,7 @@ class threshold:
         self.setSMax(s4)
         self.setSMin(s3)
         self.setVMax(s6)
-        self.setVMin(s5
+        self.setVMin(s5)
     def printAll(self):
         print(self.getHMax(), self.getHMin(),self.getSMax(),self.getSMin(),self.getVMax(),self.getVMin())
 
