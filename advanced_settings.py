@@ -101,7 +101,7 @@ def advanced_settings():
     imageFrame.pack(side=BOTTOM, padx=10, pady=10)
 
     def show_frame():
-        threshold.currentThresh.printAll()
+       
         if (show == True ):
             _, frame = cap.read()
             frame = cv2.flip(frame, 1)
