@@ -17,15 +17,20 @@ import threshold
 
 #Variables to keep track of slider position
 
+
 class SliderSet:
-    def __init__(self,name=None, slider1_pos=0, slider2_pos=0,slider3_pos=0,slider4_pos=0,slider5_pos=0,slider6_pos=0):
+    def __init__(self,name=None, hHigh=0,hLow=0,sHigh=0,sLow=0,vHigh=0,vLow=0):
         self.name=name
-        self.s1=slider1_pos
-        self.s2=slider2_pos
-        self.s3=slider3_pos
-        self.s4=slider4_pos
-        self.s5=slider5_pos
-        self.s6=slider6_pos
+        self.s1=hHigh
+        self.s2=hLow
+        self.s3=sHigh
+        self.s4=sLow
+        self.s5=vHigh
+        self.s6=vLow
+
+    def print_sets(self):
+        print(self.s1, self.s2, self.s3, self.s4 ,self.s5, self.s6)
+
 
 
 cap = cv2.VideoCapture(0)

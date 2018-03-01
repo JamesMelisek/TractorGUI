@@ -15,12 +15,11 @@ import time
 import numpy as np
 import math
 import threshold
+
+
 settings =  []
 
-
 # saved slider function, stores settings
-
-
 
 def advanced_settings():
     basicRoot=Tk()
@@ -79,6 +78,9 @@ def advanced_settings():
     def update_sliders(self):
        index=mylist.curselection()
        setting= settings[index[0]]
+       threshold.currentThresh.setAll(setting.s1, setting.s2, setting.s3, setting.s4, setting.s5, setting.s6)
+
+
        #update sliders
 
 
@@ -99,6 +101,7 @@ def advanced_settings():
     imageFrame.pack(side=BOTTOM, padx=10, pady=10)
 
     def show_frame():
+
         if (show == True ):
             _, frame = cap.read()
             frame = cv2.flip(frame, 1)
@@ -111,6 +114,7 @@ def advanced_settings():
             # standard values that usually work:
             # lower_hsv = np.array([6, 88, 100])
             # higher_hsv= np.array([24, 207, 255])
+
             lower_hsv = np.array([threshold.currentThresh.getHMin(), threshold.currentThresh.getSMin(),
                                   threshold.currentThresh.getVMin()])
             higher_hsv = np.array([threshold.currentThresh.getHMax(), threshold.currentThresh.getSMax(),

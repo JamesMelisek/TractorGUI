@@ -10,7 +10,7 @@ import numpy as np
 import math
 import threshold
 
-
+threshold.currentThresh
 
 def main_screen():
     # Capture video frames
