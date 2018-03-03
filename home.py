@@ -9,6 +9,7 @@ import time
 import numpy as np
 import math
 import threshold
+import sys
 
 threshold.currentThresh
 
@@ -97,8 +98,17 @@ def main_screen():
             mask = cv2.inRange(hsv, lower_hsv, higher_hsv)
 
             # find the vertical histogram and draw a line
-            #histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
-            histogram = np.sum(mask[(mask.shape[0] / 2):, :], axis=0)
+
+            #print (sys.version_info[0])
+
+            #check python version - takes some extra resources, better to
+            #decide from the begging and store as a variable to not check probably
+            if sys.version_info[0] >= 3:
+                histogram = np.sum(mask[math.floor(mask.shape[0] / 2):, :], axis=0)
+            else:
+                histogram = np.sum(mask[(mask.shape[0] / 2):, :], axis=0)
+
+
             val = np.amax(histogram)
             i = histogram.tolist().index(val)
 
